@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void findsum(vector<vector<int>>&finals,TreeNode*root,int target,vector<int>vc)
+    void pathsum(TreeNode*root,int target,vector<vector<int>>&finals,vector<int>v)
     {
         if(root==nullptr)
         {
@@ -19,26 +19,25 @@ public:
         }
         if(root->left==nullptr and root->right==nullptr)
         {
-             if(target==root->val)
-                {
-                 vc.push_back(root->val);
-                    finals.push_back(vc);
-                    return;
-                } 
-
+            if(target==root->val)
+            {
+                v.push_back(root->val);
+                finals.push_back(v);
+                return;
+            }
+            return;
+            
         }
-       
         
-        
-        vc.push_back(root->val);
+        v.push_back(root->val);
         target-=root->val;
-        findsum(finals,root->left,target,vc);
-        findsum(finals,root->right,target,vc);
+        pathsum(root->left,target,finals,v);
+        pathsum(root->right,target,finals,v);
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<vector<int>>finals;
-        vector<int>vc;
-        findsum(finals,root,targetSum,vc);
+        vector<int>v;
+        pathsum(root,targetSum,finals,v);
         return finals;
     }
 };
