@@ -12,49 +12,49 @@
 class Solution {
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
-        if(root == NULL){
-            return root;
+        if(root==nullptr)
+        {
+            return nullptr;
         }
-        if(key<root->val)
+        if(root->val>key)
         {
             root->left=deleteNode(root->left,key);
-            return root;
-            
-            
         }
-        else if(root->val == key){
-            if(root->left == NULL and root->right ==NULL){
+        else if(root->val==key)
+        {
+            if(root->left==nullptr and root->right==nullptr)
+            {
                 delete root;
-                return NULL;
+                return nullptr;
             }
-            else if(root->left== NULL and root->right!=NULL){
-                TreeNode *temp = root->right;
-                delete root;
-                return temp;
-            }
-            else if(root->left!= NULL and root->right==NULL){
-                TreeNode *temp = root->left;
-                delete root;
-                return temp;
-            }
-            else{
+            else if(root->left==nullptr and root->right!=nullptr)
+            {
                 TreeNode*temp=root->right;
-               
-                while(temp->left)
+                delete root;
+                return temp;
+            }
+            else if(root->left!=nullptr and root->right==nullptr)
+            {
+                TreeNode*temp=root->left;
+                delete root;
+                return temp;
+            }
+            else
+            {
+                TreeNode*temp=root->left;
+                while(temp->right)
                 {
-                    temp=temp->left;
+                    temp=temp->right;
                 }
                 root->val=temp->val;
-                root->right=deleteNode(root->right,temp->val);
-                return root;
+                root->left=deleteNode(root->left,temp->val);
                 
             }
         }
         else
         {
             root->right=deleteNode(root->right,key);
-            return root;
         }
-       return root;
+        return root;
     }
 };
