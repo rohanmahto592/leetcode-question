@@ -55,10 +55,7 @@ public:
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
         vector<TreeNode*>v;
         bool a=findpath(root,v,target->val);
-        for(auto z:v)
-        {
-            cout<<z->val<<" ";
-        }
+        
         vector<int>finals;
          int b=k;
         for(int i=v.size()-1;i>=0;i--)
